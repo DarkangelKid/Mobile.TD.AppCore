@@ -3,11 +3,8 @@ import {StyleSheet, Text, TextInput, View, TouchableOpacity, Image, ScrollView} 
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
 
-import {Header} from 'react-native-elements';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
-
 import {Colors, Fonts, Images} from '@app/themes';
-import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDHeader} from '@app/components';
+import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDHeader, TDTextInputAccount} from '@app/components';
 
 const SignInEmailScreen = () => {
   const navigation = useNavigation();
@@ -21,36 +18,8 @@ const SignInEmailScreen = () => {
       />
 
       <ScrollView style={{flex: 1, padding: 16}} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
-        <View style={{marginTop: 16}}>
-          <Text style={{color: Colors.gray70, fontSize: Fonts.size.medium}}>Email address</Text>
-          <TextInput
-            style={{
-              ...Fonts.style.large_regular,
-              borderRadius: 24,
-              height: 52,
-              backgroundColor: Colors.secondary,
-              paddingHorizontal: 10,
-              marginTop: 10,
-            }}
-            placeholderTextColor={Colors.gray60}
-            placeholder={'Enter your email address'}
-          />
-        </View>
-        <View style={{marginTop: 16}}>
-          <Text style={{color: Colors.gray70, fontSize: Fonts.size.medium}}>Password</Text>
-          <TextInput
-            style={{
-              ...Fonts.style.large_regular,
-              borderRadius: 24,
-              height: 52,
-              backgroundColor: Colors.secondary,
-              paddingHorizontal: 10,
-              marginTop: 10,
-            }}
-            placeholderTextColor={Colors.gray60}
-            placeholder={'Enter your password'}
-          />
-        </View>
+        <TDTextInputAccount title={'Email'} placeholder={'Enter your email address'} showEye={false} />
+        <TDTextInputAccount title={'Password'} placeholder={'Enter your password'} showEye={true} />
         <TDButtonPrimary title={'Sign In'} contentStyle={{marginTop: 32}} />
         <TDDividerWithTitle title={'Or continue with'} contentStyle={{marginTop: 32, paddingHorizontal: 20}} />
 

@@ -9,7 +9,7 @@ import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
 import {MAIN_HomeScreen} from '../screen/home';
-import {SignInScreen, SignInEmailScreen} from '@app/screen/account';
+import {SignInScreen, SignInEmailScreen, SignUpScreen} from '@app/screen/account';
 
 import {TDButtonNavigation} from '../components';
 
@@ -84,7 +84,7 @@ const AppBottomTab = () => {
       />
       <Tab.Screen
         name="NhacNhoScreen"
-        component={MAIN_HomeScreen}
+        component={SignUpScreen}
         options={{
           headerShown: false,
           tabBarLabel: 'Nhắc nhở',

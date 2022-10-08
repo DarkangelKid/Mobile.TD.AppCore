@@ -3,7 +3,7 @@ import {StyleSheet, Text, TextInput, View, TouchableOpacity, Image} from 'react-
 import React from 'react';
 
 import {Colors, Fonts, Images} from '@app/themes';
-import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle} from '@app/components';
+import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccount} from '@app/components';
 
 const SignInScreen = () => {
   return (
@@ -14,21 +14,7 @@ const SignInScreen = () => {
       </View>
 
       <View style={{backgroundColor: Colors.white, flex: 2 / 3, borderTopLeftRadius: 30, borderTopRightRadius: 30, padding: 16}}>
-        <View style={{marginTop: 10}}>
-          <Text style={{color: Colors.gray70, fontSize: Fonts.size.medium}}>Email</Text>
-          <TextInput
-            style={{
-              ...Fonts.style.large_regular,
-              borderRadius: 24,
-              height: 52,
-              backgroundColor: Colors.secondary,
-              paddingHorizontal: 10,
-              marginTop: 10,
-            }}
-            placeholderTextColor={Colors.gray60}
-            placeholder={'Enter your email address'}
-          />
-        </View>
+        <TDTextInputAccount title={'Email'} placeholder={'Enter your email address'} showEye={false} />
         <TDButtonPrimary title={'Continue with Email'} contentStyle={{marginTop: 32}} />
         <TDDividerWithTitle title={'Or continue with'} contentStyle={{marginTop: 32, paddingHorizontal: 20}} />
 
