@@ -1,6 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import {View, Text} from 'react-native';
+import {Colors} from '@app/themes';
 
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 const Tab = createBottomTabNavigator();
@@ -26,7 +27,7 @@ const AppBottomTab = () => {
         tabBarShowLabel: true,
         tabBarActiveBackgroundColor: '#FFF',
         tabBarInactiveBackgroundColor: '#FFF',
-        tabBarActiveTintColor: '#D6002C',
+        tabBarActiveTintColor: Colors.primary,
         tabBarInactiveTintColor: '#757E83',
         tabBarLabelStyle: {
           fontSize: 10,
@@ -47,7 +48,7 @@ const AppBottomTab = () => {
               <Icon
                 name="list"
                 size={isTablet ? 24 : 22}
-                color={focused ? '#D6002C' : '#757E83'}
+                color={focused ? Colors.primary : '#757E83'}
                 solid={focused ? true : false}
               />
             </View>
@@ -67,7 +68,7 @@ const AppBottomTab = () => {
               <Icon
                 name="chart-line"
                 size={isTablet ? 24 : 22}
-                color={focused ? '#D6002C' : '#757E83'}
+                color={focused ? Colors.primary : '#757E83'}
                 solid={focused ? true : false}
               />
             </View>
@@ -92,7 +93,7 @@ const AppBottomTab = () => {
             <Icon
               name="alarm-clock"
               size={isTablet ? 24 : 22}
-              color={focused ? '#D6002C' : '#757E83'}
+              color={focused ? Colors.primary : '#757E83'}
               solid={focused ? true : false}
             />
           ),
@@ -105,7 +106,12 @@ const AppBottomTab = () => {
           headerShown: false,
           tabBarLabel: 'Cài đặt',
           tabBarIcon: ({focused, tintColor, size}) => (
-            <Icon name="cogs" size={isTablet ? 24 : 22} color={focused ? '#D6002C' : '#757E83'} solid={focused ? true : false} />
+            <Icon
+              name="cogs"
+              size={isTablet ? 24 : 22}
+              color={focused ? Colors.primary : '#757E83'}
+              solid={focused ? true : false}
+            />
           ),
         }}
       />
