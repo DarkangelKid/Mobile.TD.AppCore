@@ -2,7 +2,8 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, Image} from 'react-native';
 import React from 'react';
 
-import {Colors, Fonts} from '@app/themes';
+import {Colors, Fonts, Images} from '@app/themes';
+import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle} from '@app/components';
 
 const SignInScreen = () => {
   return (
@@ -28,66 +29,17 @@ const SignInScreen = () => {
             placeholder={'Enter your email address'}
           />
         </View>
-        <TouchableOpacity
-          style={{
-            marginTop: 32,
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: Colors.primary,
-            borderRadius: 100,
-            padding: 16,
-          }}>
-          <Text style={{...Fonts.style.large_bold, color: Colors.white, lineHeight: 24}}>Continue with Email</Text>
-        </TouchableOpacity>
-        <View
-          style={{
-            marginTop: 32,
-            alignContent: 'center',
-            alignItems: 'center',
-            justifyContent: 'center',
-            flexDirection: 'row',
-          }}>
-          <View style={{backgroundColor: '#6C6C6C', height: 1, width: 62}} />
-          <Text style={{fontSize: 14, color: '#6C6C6C', marginHorizontal: 12}}>Or continue with</Text>
-          <View style={{backgroundColor: '#6C6C6C', height: 1, width: 62}} />
-        </View>
+        <TDButtonPrimary title={'Continue with Email'} contentStyle={{marginTop: 32}} />
+        <TDDividerWithTitle title={'Or continue with'} contentStyle={{marginTop: 32, paddingHorizontal: 20}} />
+
         <View style={{marginTop: 32}}>
-          <TouchableOpacity
-            style={{
-              alignContent: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: Colors.white,
-              borderColor: Colors.black,
-              borderWidth: 1,
-              borderRadius: 100,
-              padding: 16,
-              flexDirection: 'row',
-            }}>
-            <Image source={require('@app/assets/images/google.png')} style={{width: 24, height: 24}} />
-            <Text style={{...Fonts.style.large_bold, color: Colors.lineblack, lineHeight: 24, marginStart: 10}}>
-              Continue with Google
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={{
-              marginTop: 16,
-              alignContent: 'center',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: Colors.white,
-              borderColor: Colors.black,
-              borderWidth: 1,
-              borderRadius: 100,
-              padding: 16,
-              flexDirection: 'row',
-            }}>
-            <Image source={require('@app/assets/images/apple.png')} style={{width: 24, height: 24}} />
-            <Text style={{...Fonts.style.large_bold, color: Colors.lineblack, lineHeight: 24, marginStart: 10}}>
-              Continue with Apple
-            </Text>
-          </TouchableOpacity>
+          <TDButtonSecondary title={'Continue with Google'} image={Images.icons.google} onPress={() => {}} />
+          <TDButtonSecondary
+            title={'Continue with Apple'}
+            image={Images.icons.apple}
+            contentStyle={{marginTop: 16}}
+            onPress={() => {}}
+          />
         </View>
         <View
           style={{
