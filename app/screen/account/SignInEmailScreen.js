@@ -20,7 +20,24 @@ const SignInEmailScreen = () => {
       <ScrollView style={{flex: 1, padding: 16}} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         <TDTextInputAccount title={'Email'} placeholder={'Enter your email address'} showEye={false} />
         <TDTextInputAccount title={'Password'} placeholder={'Enter your password'} showEye={true} />
-        <TDButtonPrimary title={'Sign In'} contentStyle={{marginTop: 32}} />
+
+        <View
+          style={{
+            marginTop: 16,
+            alignItems: 'flex-end',
+            justifyContent: 'center',
+            flexDirection: 'row',
+          }}>
+          <View style={{flex: 1}} />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ForgotScreen');
+            }}>
+            <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>Forgot Password</Text>
+          </TouchableOpacity>
+        </View>
+
+        <TDButtonPrimary title={'Sign In'} contentStyle={{marginTop: 16}} />
         <TDDividerWithTitle title={'Or continue with'} contentStyle={{marginTop: 32, paddingHorizontal: 20}} />
 
         <View style={{marginTop: 32}}>

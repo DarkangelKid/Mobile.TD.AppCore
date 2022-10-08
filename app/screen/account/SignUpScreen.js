@@ -20,7 +20,7 @@ const SignInEmailScreen = () => {
       <ScrollView style={{flex: 1, padding: 16}} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         <View style={{alignContent: 'center', alignItems: 'center', justifyContent: 'center'}}>
           <Text style={{color: Colors.black, fontWeight: 'bold', fontSize: 24, lineHeight: 32}}>Complet your account!</Text>
-          <Text style={{color: Colors.black, fontSize: 14, lineHeight: 22, marginTop: 5}}>Lorem ipsum dolor sit amet</Text>
+          <Text style={{color: Colors.gray70, fontSize: 14, lineHeight: 22, marginTop: 5}}>Lorem ipsum dolor sit amet</Text>
         </View>
         <View style={{marginTop: 16}}>
           <TDTextInputAccount title={'Full Name'} placeholder={'Enter your name'} showEye={false} />
@@ -38,7 +38,10 @@ const SignInEmailScreen = () => {
               flexDirection: 'row',
             }}>
             <Text style={{color: '#6C6C6C', fontSize: 16}}>{'Already have an account? '}</Text>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('SignInScreen');
+              }}>
               <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>Login</Text>
             </TouchableOpacity>
           </View>
