@@ -9,6 +9,13 @@ import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
 import {MAIN_HomeScreen} from '../screen/home';
+import {SignInScreen} from '@app/screen/account';
+
+import {TDButtonNavigation} from '../components';
+
+const PlusScreen = () => {
+  return null;
+};
 
 const AppBottomTab = () => {
   return (
@@ -31,14 +38,14 @@ const AppBottomTab = () => {
       <Tab.Screen
         headerMode={'none'}
         name="HomeScreen"
-        component={MAIN_HomeScreen}
+        component={SignInScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Trang chủ',
+          tabBarLabel: 'Lịch sử',
           tabBarIcon: ({focused, tintColor, size}) => (
             <View>
               <Icon
-                name="home"
+                name="list"
                 size={isTablet ? 24 : 22}
                 color={focused ? '#D6002C' : '#757E83'}
                 solid={focused ? true : false}
@@ -49,16 +56,16 @@ const AppBottomTab = () => {
       />
 
       <Tab.Screen
-        name="TDTM_MainScreen"
+        name="BaoCaoScreen"
         component={MAIN_HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Tổng đài nhanh',
+          tabBarLabel: 'Báo cáo',
           tabBarBadge: null,
           tabBarIcon: ({focused, tintColor, size}) => (
             <View>
               <Icon
-                name="phone-volume"
+                name="chart-line"
                 size={isTablet ? 24 : 22}
                 color={focused ? '#D6002C' : '#757E83'}
                 solid={focused ? true : false}
@@ -67,15 +74,38 @@ const AppBottomTab = () => {
           ),
         }}
       />
-
       <Tab.Screen
-        name="ProfileScreen"
+        name="AddScreen"
+        component={PlusScreen}
+        options={{
+          headerShown: false,
+          tabBarButton: () => <TDButtonNavigation />,
+        }}
+      />
+      <Tab.Screen
+        name="NhacNhoScreen"
         component={MAIN_HomeScreen}
         options={{
           headerShown: false,
-          tabBarLabel: 'Cá nhân',
+          tabBarLabel: 'Nhắc nhở',
           tabBarIcon: ({focused, tintColor, size}) => (
-            <Icon name="user" size={isTablet ? 24 : 22} color={focused ? '#D6002C' : '#757E83'} solid={focused ? true : false} />
+            <Icon
+              name="alarm-clock"
+              size={isTablet ? 24 : 22}
+              color={focused ? '#D6002C' : '#757E83'}
+              solid={focused ? true : false}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="SettingScreen"
+        component={MAIN_HomeScreen}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Cài đặt',
+          tabBarIcon: ({focused, tintColor, size}) => (
+            <Icon name="cogs" size={isTablet ? 24 : 22} color={focused ? '#D6002C' : '#757E83'} solid={focused ? true : false} />
           ),
         }}
       />

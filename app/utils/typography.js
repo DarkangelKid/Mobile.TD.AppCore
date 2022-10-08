@@ -13,7 +13,7 @@ export const typography = () => {
 
 const styles = StyleSheet.create({
   defaultText: {
-    fontFamily: 'Roboto-Regular',
+    fontFamily: 'BeVietnam-Regular',
     color: '#000000CC',
   },
 });
