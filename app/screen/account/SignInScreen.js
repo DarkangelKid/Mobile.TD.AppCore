@@ -1,13 +1,53 @@
 /* eslint-disable react-native/no-inline-styles */
-import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView} from 'react-native';
-import React from 'react';
+import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert} from 'react-native';
+import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+
+import SQLite from 'react-native-sqlite-storage';
+
+import SQLiteHelper from '@app/utils/SQLiteHelper';
+const sqliteH = new SQLiteHelper({name: 'tdcore.db', createFromLocation: 1});
 
 import {Colors, Fonts, Images} from '@app/themes';
 import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccount} from '@app/components';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const tmp = async () => {
+      // 1.open database
+      const {res: sqLite, err} = await sqliteH.open();
+      // original sqLite Instance: execute sql
+      sqLite.executeSql('SELECT * FROM tbHangXe');
+      const {res, errr} = await sqliteH.selectItems('tbHangXe', {
+        columns: ['Id', 'Name', 'Name_En'],
+        conditions: [{columnName: 'Name', value: 'demo'}],
+        pageNo: 2,
+        pageLength: 5,
+      });
+      console.log(res);
+      console.log(errr);
+    };
+    tmp();
+
+    /* var db = SQLite.openDatabase({name: 'tdcore.db', createFromLocation: 1});
+
+    db.transaction(tx => {
+      console.log('vaoday');
+      tx.executeSql('SELECT * FROM tbHangXe', [], (tx, results) => {
+        var len = results.rows.length;
+        console.log('len', len);
+        var temp = [];
+        for (let i = 0; i < results.rows.length; ++i) {
+          temp.push(results.rows.item(i));
+        }
+        console.log(temp);
+        console.log('Query completed');
+      }); 
+      
+    }); */
+  }, []);
 
   return (
     <View style={{flex: 1, backgroundColor: Colors.primary}}>

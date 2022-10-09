@@ -27,6 +27,7 @@
 		486BD32E78454061ACCA91A4 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B6C8BEC091FC4DA0ACE3C3C0 /* Roboto-BlackItalic.ttf */; };
 		5F8A2EA0873C4AE486EE296A /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04496A73AFE44424B3C525B8 /* Roboto-BoldItalic.ttf */; };
 		66265519E4DC4B5AA762C429 /* BeVietnam-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 277BA45C54314D55BA006E07 /* BeVietnam-MediumItalic.ttf */; };
+		6768817028F273C100D6BB54 /* www in Resources */ = {isa = PBXBuildFile; fileRef = 6768816F28F273C100D6BB54 /* www */; };
 		676D128528F11C84000147B5 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 676D128428F11C84000147B5 /* File.swift */; };
 		6FC3D5424E1E41FF926E3C66 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 020EE49708BC471BADAB8475 /* Roboto-Thin.ttf */; };
 		74561BE56F2A46B29655C834 /* BeVietnam-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CC83E685A65040B3B9151FA2 /* BeVietnam-BoldItalic.ttf */; };
@@ -92,6 +93,7 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-TDAppCore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TDAppCore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		62CBB7A9D82142CE99CC9906 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = ../app/assets/fonts/Fontisto.ttf; sourceTree = "<group>"; };
 		64D59BB52A63466E96083D64 /* BeVietnam-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "BeVietnam-ThinItalic.ttf"; path = "../app/assets/fonts/BeVietnam-ThinItalic.ttf"; sourceTree = "<group>"; };
+		6768816F28F273C100D6BB54 /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = "<group>"; };
 		676D128328F11C83000147B5 /* TDAppCore-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TDAppCore-Bridging-Header.h"; sourceTree = "<group>"; };
 		676D128428F11C84000147B5 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		67773B7FC4844399908DF6BA /* FontAwesome5_Pro_Duotone.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Pro_Duotone.ttf; path = ../app/assets/fonts/FontAwesome5_Pro_Duotone.ttf; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 		13B07FAE1A68108700A75B9A /* TDAppCore */ = {
 			isa = PBXGroup;
 			children = (
+				6768816F28F273C100D6BB54 /* www */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -392,6 +395,7 @@
 				E3873DCDD1FD49EB8829D0A6 /* BeVietnam-Medium.ttf in Resources */,
 				66265519E4DC4B5AA762C429 /* BeVietnam-MediumItalic.ttf in Resources */,
 				0F39A27DDB754C519AA2DB4A /* BeVietnam-Regular.ttf in Resources */,
+				6768817028F273C100D6BB54 /* www in Resources */,
 				094ECFDC09FB497FBB4E3CD7 /* BeVietnam-SemiBold.ttf in Resources */,
 				437E21FFFA8B44389C0A93DF /* BeVietnam-SemiBoldItalic.ttf in Resources */,
 				FF4C4D2E106C49DA945FC545 /* BeVietnam-Thin.ttf in Resources */,
