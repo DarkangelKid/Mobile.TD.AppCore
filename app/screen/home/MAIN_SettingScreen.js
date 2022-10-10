@@ -1,12 +1,12 @@
 /* eslint-disable react-native/no-inline-styles */
 import React from 'react';
-import {View, TouchableOpacity, ScrollView} from 'react-native';
+import {View, Text, ScrollView} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
+import VersionCheck from 'react-native-version-check';
 import {Header} from 'react-native-elements';
 
 import {Colors, Fonts, Images} from '@app/themes';
-import {TDMenuItem} from '@app/components';
+import {TDMenuItem, TDDivider} from '@app/components';
 
 const MAIN_HomeScreen = () => {
   const navigation = useNavigation();
@@ -28,11 +28,12 @@ const MAIN_HomeScreen = () => {
         }}
         centerContainerStyle={{justifyContent: 'center'}}
       />
-      <ScrollView style={{flex: 1}} >
+      <ScrollView style={{flex: 1}}>
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Thông báo, cảnh báo'} iconLeft="bell" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Tài khoản của tôi'} iconLeft="user" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Người dùng'} iconLeft="user-plus" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Phương tiện'} iconLeft="car" />
+        <TDDivider />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Nhiên liệu'} iconLeft="gas-pump" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại hình dịch vụ'} iconLeft="wrench" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại chi'} iconLeft="credit-card" />
@@ -44,8 +45,12 @@ const MAIN_HomeScreen = () => {
           iconLeft="usd-circle"
         />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Địa điểm'} iconLeft="map-marker" />
+        <TDDivider />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Liên lạc'} iconLeft="envelope" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Thông tin thêm'} iconLeft="info-circle" />
+        <Text style={{textAlign: 'center', margin: 10, color: '#818181'}}>
+          Phiên bản: {`${VersionCheck.getCurrentVersion()} (${VersionCheck.getCurrentBuildNumber()})`}
+        </Text>
       </ScrollView>
     </View>
   );

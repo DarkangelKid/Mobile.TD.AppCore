@@ -5,5 +5,15 @@ import TDDividerWithTitle from './TDDividerWithTitle';
 import TDHeader from './TDHeader';
 import TDTextInputAccount from './TDTextInputAccount';
 import TDMenuItem from './TDMenuItem';
+import TDDivider from './TDDivider';
 
-export {TDButtonNavigation, TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDHeader, TDTextInputAccount, TDMenuItem};
+export {
+  TDButtonNavigation,
+  TDButtonPrimary,
+  TDButtonSecondary,
+  TDDividerWithTitle,
+  TDHeader,
+  TDTextInputAccount,
+  TDMenuItem,
+  TDDivider,
+};
