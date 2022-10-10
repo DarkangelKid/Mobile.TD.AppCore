@@ -6,6 +6,7 @@ import {Modalize} from 'react-native-modalize';
 import {Portal} from 'react-native-portalize';
 
 import {Colors, Fonts} from '@app/themes';
+import {TouchableOpacity as TouchableOpacityDemo} from 'react-native-gesture-handler';
 
 const TDButtonNavigation = () => {
   const contentRef = useRef < Animated.AnimatedComponent < ScrollView >> null;
@@ -17,7 +18,7 @@ const TDButtonNavigation = () => {
 
   return (
     <>
-      <TouchableOpacity
+      <TouchableOpacityDemo
         onPress={() => {
           modalizeRef.current?.open();
         }}
@@ -37,7 +38,7 @@ const TDButtonNavigation = () => {
           elevation: 4,
         }}>
         <FontAwesome name={'plus'} size={24} color={'#FFF'} />
-      </TouchableOpacity>
+      </TouchableOpacityDemo>
       <Portal>
         <Modalize
           scrollViewProps={{showsVerticalScrollIndicator: false}}
@@ -45,6 +46,12 @@ const TDButtonNavigation = () => {
           contentRef={contentRef}
           modalHeight={500}
           snapPoint={500}>
+          <TouchableOpacity
+            onPress={() => {
+              ModalHide();
+            }}>
+            <Text>Dong</Text>
+          </TouchableOpacity>
           <Text>123123</Text>
         </Modalize>
       </Portal>

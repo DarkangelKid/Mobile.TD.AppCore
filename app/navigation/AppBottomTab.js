@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5Pro';
 import DeviceInfo from 'react-native-device-info';
 let isTablet = DeviceInfo.isTablet();
 
-import {MAIN_HomeScreen} from '../screen/home';
+import {MAIN_HomeScreen, MAIN_SettingScreen} from '../screen/home';
 import AccountStack from './AccountStack';
 
 import {TDButtonNavigation} from '../components';
@@ -101,7 +101,7 @@ const AppBottomTab = () => {
       />
       <Tab.Screen
         name="SettingScreen"
-        component={MAIN_HomeScreen}
+        component={MAIN_SettingScreen}
         options={{
           headerShown: false,
           tabBarLabel: 'Cài đặt',
