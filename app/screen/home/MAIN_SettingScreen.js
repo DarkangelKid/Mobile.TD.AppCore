@@ -11,6 +11,8 @@ import {TDMenuItem, TDDivider} from '@app/components';
 const MAIN_HomeScreen = () => {
   const navigation = useNavigation();
 
+  console.log(123123)
+
   return (
     <View style={{flex: 1}}>
       <Header
@@ -35,7 +37,7 @@ const MAIN_HomeScreen = () => {
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Phương tiện'} iconLeft="car" />
         <TDDivider />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Nhiên liệu'} iconLeft="gas-pump" />
-        <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại hình dịch vụ'} iconLeft="wrench" />
+        <TDMenuItem onPress={() => navigation.navigate('ListLoaiDichVuScreen')} title={'Loại hình dịch vụ'} iconLeft="wrench" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại chi'} iconLeft="credit-card" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại thu nhập'} iconLeft="wallet" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Lý do'} iconLeft="wrench" />
