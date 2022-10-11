@@ -10,7 +10,19 @@ const Stack = createNativeStackNavigator();
 import AppStack from './AppStack';
 import {Host} from 'react-native-portalize';
 
+import SQLiteHelper from '@app/utils/SQLiteHelper';
+
+const sqliteH = new SQLiteHelper({name: 'tdcore.db', createFromLocation: 1});
+
 const RootContainerScreen = () => {
+  useEffect(() => {
+    const tmp = async () => {
+      await sqliteH.open();
+    };
+    tmp();
+    return () => {};
+  }, []);
+
   return (
     <NavigationContainer>
       <Host>

@@ -1,5 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 import React, {useState, useEffect, useCallback} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+
 import {StyleSheet, Text, View, TouchableOpacity, FlatList, ActivityIndicator} from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
@@ -15,9 +17,12 @@ const RenderItem = props => {
 
   return (
     <TouchableOpacity
-      style={{paddingVertical: 10, marginStart: 10, borderBottomColor: Colors.gray60, borderBottomWidth: 0.5}}
+      key={Math.random().toString()}
+      style={{paddingVertical: 16, marginStart: 10}}
       onPress={() => {
-        navigation.navigate('');
+        navigation.navigate('LoaiDichVu_DetailScreen', {
+          data: {tableName: 'tbLoaiDichVu', tableTitle: 'Loại hình dịch vụ', ...props?.item},
+        });
       }}>
       <Text style={{fontSize: 14, color: Colors.lineblack}} numberOfLines={1}>
         {props?.item?.Name ?? ''}
@@ -27,28 +32,35 @@ const RenderItem = props => {
 };
 
 const ListLoaiDichVuScreen = () => {
+  const navigation = useNavigation();
+  const random = useSelector(state => state.global.random);
+  const route = useRoute();
+  const dataParam = route.params?.data ?? null;
+
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const tmp = async () => {
       setIsLoading(true);
-      // 1.open database
-      const {res: sqLite, err} = await sqliteH.open();
-      const {res, errr} = await sqliteH.selectItems('tbLoaiDichVu', '*');
+      //const {res, errr} = await sqliteH.selectItems('tbLoaiDichVu', '*');
+      const {res} = await sqliteH.selectItems(dataParam?.tableName, {
+        columns: '*',
+        orderBy: 'Name ASC',
+      });
       setData(res ?? []);
       setIsLoading(false);
     };
     tmp();
-  }, []);
+  }, [dataParam?.tableName, random]);
 
-  const keyExtractor = useCallback(item => item.id, []);
+  const keyExtractor = useCallback(item => Math.random().toString(), []);
   const renderItem = useCallback(({item}) => <RenderItem item={item} />, []);
 
   return (
     <View style={{flex: 1, backgroundColor: Colors.white}}>
       <Header
-        title="Loại hình dịch vụ"
+        title={dataParam?.tableTitle ?? ''}
         isStack={true}
         RightComponent={() => (
           <TouchableOpacity
@@ -58,7 +70,9 @@ const ListLoaiDichVuScreen = () => {
               width: 24,
               height: 24,
             }}
-            onPress={() => {}}>
+            onPress={() => {
+              navigation.navigate('LoaiDichVu_DetailScreen');
+            }}>
             <FontAwesome name={'plus'} color={Colors.white} size={24} duotone />
           </TouchableOpacity>
         )}
@@ -74,6 +88,7 @@ const ListLoaiDichVuScreen = () => {
             data={data}
             renderItem={renderItem}
             ListEmptyComponent={() => <Text style={{textAlign: 'center', color: '#50565B', margin: 10}}>Không có dữ liệu</Text>}
+            ItemSeparatorComponent={() => <View style={{backgroundColor: Colors.gray60, height: 1, marginHorizontal: 10}} />}
             keyExtractor={keyExtractor}
           />
         )}

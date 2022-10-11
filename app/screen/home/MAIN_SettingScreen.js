@@ -11,7 +11,7 @@ import {TDMenuItem, TDDivider} from '@app/components';
 const MAIN_HomeScreen = () => {
   const navigation = useNavigation();
 
-  console.log(123123)
+  console.log(123123);
 
   return (
     <View style={{flex: 1}}>
@@ -36,13 +36,46 @@ const MAIN_HomeScreen = () => {
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Người dùng'} iconLeft="user-plus" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Phương tiện'} iconLeft="car" />
         <TDDivider />
-        <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Nhiên liệu'} iconLeft="gas-pump" />
-        <TDMenuItem onPress={() => navigation.navigate('ListLoaiDichVuScreen')} title={'Loại hình dịch vụ'} iconLeft="wrench" />
-        <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại chi'} iconLeft="credit-card" />
-        <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Loại thu nhập'} iconLeft="wallet" />
-        <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Lý do'} iconLeft="wrench" />
         <TDMenuItem
-          onPress={() => navigation.navigate('NotificationScreen')}
+          onPress={() =>
+            navigation.navigate('ListLoaiDichVuScreen', {data: {tableName: 'tbNhienLieu', tableTitle: 'Nhiên liệu'}})
+          }
+          title={'Nhiên liệu'}
+          iconLeft="gas-pump"
+        />
+
+        <TDMenuItem
+          onPress={() =>
+            navigation.navigate('ListLoaiDichVuScreen', {data: {tableName: 'tbLoaiDichVu', tableTitle: 'Loại hình dịch vụ'}})
+          }
+          title={'Loại hình dịch vụ'}
+          iconLeft="wrench"
+        />
+        <TDMenuItem
+          onPress={() =>
+            navigation.navigate('ListLoaiDichVuScreen', {data: {tableName: 'tbLoaiChiTieu', tableTitle: 'Loại chi tiêu'}})
+          }
+          title={'Loại chi'}
+          iconLeft="credit-card"
+        />
+        <TDMenuItem
+          onPress={() =>
+            navigation.navigate('ListLoaiDichVuScreen', {data: {tableName: 'tbLoaiThuNhap', tableTitle: 'Loại thu nhập'}})
+          }
+          title={'Loại thu nhập'}
+          iconLeft="wallet"
+        />
+        <TDMenuItem
+          onPress={() => navigation.navigate('ListLoaiDichVuScreen', {data: {tableName: 'tbLyDo', tableTitle: 'Lý do'}})}
+          title={'Lý do'}
+          iconLeft="wrench"
+        />
+        <TDMenuItem
+          onPress={() =>
+            navigation.navigate('ListLoaiDichVuScreen', {
+              data: {tableName: 'tbPhuongThucThanhToan', tableTitle: 'Phương thức thanh toán'},
+            })
+          }
           title={'Phương thức thanh toán'}
           iconLeft="usd-circle"
         />

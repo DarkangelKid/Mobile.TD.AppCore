@@ -1,9 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   accessToken: '',
   userInfo: null,
-
+  random: 0,
   listLoading: false,
   actionsLoading: false,
   error: null,
@@ -33,6 +33,9 @@ export const globalSlice = createSlice({
       } else {
         state.actionsLoading = true;
       }
+    },
+    setRandom: (state, action) => {
+      state.random = Math.random();
     },
   },
 });

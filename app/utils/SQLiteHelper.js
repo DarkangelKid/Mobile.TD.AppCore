@@ -348,7 +348,7 @@ export default class SQLite {
 
   async _selectItems(tableName, config = {}) {
     try {
-      const {columns = '*', conditions, pageNo, pageLength} = config;
+      const {columns = '*', conditions, pageNo, pageLength, orderBy} = config;
       if (!tableName) {
         throw new Error('Required parameter missing');
       }
@@ -427,6 +427,11 @@ export default class SQLite {
           sqlStr += `FROM ${tableName}`;
         }
       }
+
+      if (orderBy) {
+        sqlStr += ` ORDER BY ${orderBy} `;
+      }
+
       if (pageNo && pageLength) {
         const limit = pageNo * pageLength;
         const offset = pageLength * (pageNo - 1) > 0 ? pageLength * (pageNo - 1) : 0;
@@ -438,7 +443,7 @@ export default class SQLite {
         .executeSql(sqlStr)
         .then(res => {
           if (res && res[0] && res[0].rows) {
-            this.successInfo(`SQLiteStorage selectItems success: 查询到 ${res[0].rows.length} 行`, true);
+            this.successInfo(`SQLiteStorage selectItems success:  ${res[0].rows.length} `, true);
             const queryResult = [];
             const len = res[0].rows.length;
             for (let i = 0; i < len; i++) {
