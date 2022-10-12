@@ -23,3 +23,7 @@ sửa
 -  compile "com.facebook.react:react-native:+" // From node_modules
 +  implementation "com.facebook.react:react-native:+" // From node_modules
  }
+
+
+
+ arch -x86_64 pod install
