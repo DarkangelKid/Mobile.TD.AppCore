@@ -499,6 +499,7 @@
 				DEVELOPMENT_TEAM = HN5GR26FA8;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = TDAppCore/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Quản Lý Xe";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,6 +529,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = HN5GR26FA8;
 				INFOPLIST_FILE = TDAppCore/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Quản Lý Xe";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

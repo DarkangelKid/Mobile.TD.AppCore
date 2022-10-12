@@ -3,14 +3,15 @@ import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert} 
 import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
+import {BannerAd, BannerAdSize, TestIds} from 'react-native-google-mobile-ads';
+
+const adUnitId = __DEV__ ? TestIds.BANNER : 'ca-app-pub-3232870975065669/9474344070';
 
 import {Colors, Fonts, Images} from '@app/themes';
 import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccount} from '@app/components';
 
 const SignInScreen = () => {
   const navigation = useNavigation();
-
-
 
   return (
     <View style={{flex: 1, backgroundColor: Colors.primary}}>
@@ -56,6 +57,13 @@ const SignInScreen = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <BannerAd
+        unitId={adUnitId}
+        size={BannerAdSize.FULL_BANNER}
+        requestOptions={{
+          requestNonPersonalizedAdsOnly: true,
+        }}
+      />
     </View>
   );
 };
