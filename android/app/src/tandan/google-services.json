@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "918311932426",
+    "project_id": "carmanager-9a37e",
+    "storage_bucket": "carmanager-9a37e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918311932426:android:dda183b4db3b2bdd39c5f3",
+        "android_client_info": {
+          "package_name": "com.daunut.carmanager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918311932426-cqnmsolfo8sdfce4mok1rlqh0bm607qe.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.daunut.carmanager",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "918311932426-00sogs3hsmp9qarf2s90rhjk2sj0hq50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-N0INIFd632CLIT4dd3x-Qm8f5g4Jzkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918311932426-00sogs3hsmp9qarf2s90rhjk2sj0hq50.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "918311932426-onvag9f2vn8f0mbgh815vns0gkd740aj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.daunut.carmanager"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:918311932426:android:1d6d02fb204de78839c5f3",
+        "android_client_info": {
+          "package_name": "com.tdappcore"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "918311932426-00sogs3hsmp9qarf2s90rhjk2sj0hq50.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-N0INIFd632CLIT4dd3x-Qm8f5g4Jzkg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "918311932426-00sogs3hsmp9qarf2s90rhjk2sj0hq50.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "918311932426-onvag9f2vn8f0mbgh815vns0gkd740aj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.daunut.carmanager"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

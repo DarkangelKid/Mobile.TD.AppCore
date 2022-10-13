@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>918311932426-onvag9f2vn8f0mbgh815vns0gkd740aj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.918311932426-onvag9f2vn8f0mbgh815vns0gkd740aj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>918311932426-cqnmsolfo8sdfce4mok1rlqh0bm607qe.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAkMI7UOQkYLHltB9GIIMdu5Q6WfhnuqcQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>918311932426</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.daunut.carmanager</string>
+	<key>PROJECT_ID</key>
+	<string>carmanager-9a37e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>carmanager-9a37e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:918311932426:ios:9fd3762244495bad39c5f3</string>
+</dict>
+</plist>
