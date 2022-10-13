@@ -38,7 +38,7 @@ const AppBottomTab = () => {
       backBehavior={'initialRoute'}>
       <Tab.Screen
         headerMode={'none'}
-        name="HomeScreen"
+        name="AccountStack"
         component={AccountStack}
         options={{
           headerShown: false,

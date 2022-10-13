@@ -21,7 +21,7 @@ const RenderItem = props => {
       style={{paddingVertical: 16, marginStart: 10}}
       onPress={() => {
         navigation.navigate('LoaiDichVu_DetailScreen', {
-          data: {tableName: props.dataParam.tableName, tableTitle: props.dataParam.tableTitle, ...props?.item},
+          data: {tableName: 'tbViTri', tableTitle: 'Địa điểm', ...props?.item},
         });
       }}>
       <Text style={{fontSize: 14, color: Colors.lineblack}} numberOfLines={1}>
@@ -43,8 +43,7 @@ const ListLoaiDichVuScreen = () => {
   useEffect(() => {
     const tmp = async () => {
       setIsLoading(true);
-      //const {res, errr} = await sqliteH.selectItems('tbLoaiDichVu', '*');
-      const {res} = await sqliteH.selectItems(dataParam?.tableName, {
+      const {res} = await sqliteH.selectItems('tbViTri', {
         columns: '*',
         orderBy: 'Name ASC',
       });
@@ -55,12 +54,12 @@ const ListLoaiDichVuScreen = () => {
   }, [dataParam?.tableName, random]);
 
   const keyExtractor = useCallback(item => Math.random().toString(), []);
-  const renderItem = useCallback(({item}) => <RenderItem item={item} dataParam={dataParam} />, []);
+  const renderItem = useCallback(({item}) => <RenderItem item={item} />, []);
 
   return (
     <View style={{flex: 1, backgroundColor: Colors.white}}>
       <Header
-        title={dataParam?.tableTitle ?? ''}
+        title={'Địa điểm'}
         isStack={true}
         RightComponent={() => (
           <TouchableOpacity
@@ -71,9 +70,7 @@ const ListLoaiDichVuScreen = () => {
               height: 24,
             }}
             onPress={() => {
-              navigation.navigate('LoaiDichVu_DetailScreen', {
-                data: {tableName: dataParam.tableName, tableTitle: dataParam.tableTitle},
-              });
+              navigation.navigate('DiaDiem_DetailScreen', {data: {tableName: 'tbViTri', tableTitle: 'Địa điểm'}});
             }}>
             <FontAwesome name={'plus'} color={Colors.white} size={24} duotone />
           </TouchableOpacity>

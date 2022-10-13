@@ -79,7 +79,7 @@ const MAIN_HomeScreen = () => {
           title={'Phương thức thanh toán'}
           iconLeft="usd-circle"
         />
-        <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Địa điểm'} iconLeft="map-marker" />
+        <TDMenuItem onPress={() => navigation.navigate('ListDiaDiemScreen')} title={'Địa điểm'} iconLeft="map-marker" />
         <TDDivider />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Liên lạc'} iconLeft="envelope" />
         <TDMenuItem onPress={() => navigation.navigate('NotificationScreen')} title={'Thông tin thêm'} iconLeft="info-circle" />
