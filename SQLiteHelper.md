@@ -1,9 +1,9 @@
 # react-native-sqlite-helper
 
-Features:
+Features :
 
 (1) Use Promise
-
+ 
 (2) Non-blocking
 
 (3) Functional SQL
