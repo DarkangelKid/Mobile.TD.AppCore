@@ -7,3 +7,7 @@ const {actions} = globalSlice;
 export const setRandom = () => dispatch => {
   dispatch(actions.setRandom());
 };
+
+export const saveCurrentPosition = CurrentPosition => dispatch => {
+  return dispatch(actions.saveCurrentPosition(CurrentPosition));
+};

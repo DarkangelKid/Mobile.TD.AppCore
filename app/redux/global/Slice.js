@@ -4,6 +4,10 @@ const initialState = {
   accessToken: '',
   userInfo: null,
   random: 0,
+  CurrentPosition: {
+    latitude: 0,
+    longitude: 0,
+  },
   listLoading: false,
   actionsLoading: false,
   error: null,
@@ -36,6 +40,9 @@ export const globalSlice = createSlice({
     },
     setRandom: (state, action) => {
       state.random = Math.random();
+    },
+    saveCurrentPosition: (state, action) => {
+      state.CurrentPosition = action.payload;
     },
   },
 });

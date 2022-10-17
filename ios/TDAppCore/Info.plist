@@ -35,8 +35,12 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Vị trí của bạn được yêu cầu để lấy thông tin thời tiết, chỉ số AQI chính xác</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Vị trí của bạn được yêu cầu để lấy thông tin thời tiết, chỉ số AQI chính xác</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Vị trí của bạn được yêu cầu để lấy thông tin thời tiết, chỉ số AQI chính xác</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>BeVietnam-Bold.ttf</string>
