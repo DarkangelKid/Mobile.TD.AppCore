@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '12.4'
+platform :ios, '13'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'TDAppCore' do
@@ -33,6 +33,9 @@ target 'TDAppCore' do
   pod 'react-native-config', :path => '../node_modules/react-native-config'
   pod 'rn-fetch-blob', :path => '../node_modules/rn-fetch-blob'
   pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path
 
   post_install do |installer|
     react_native_post_install(

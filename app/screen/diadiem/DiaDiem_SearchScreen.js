@@ -15,115 +15,16 @@ import * as actions from '@app/redux/global/Actions';
 
 import {Header, TDButtonPrimary, TDButtonSecondary} from '@app/components';
 
-const sqliteH = new SQLiteHelper({name: 'tdcore.db', createFromLocation: 1});
-
 const ListLoaiDichVuScreen = () => {
-  const navigation = useNavigation();
-  const dispatch = useDispatch();
-  const route = useRoute();
-  const dataParam = route.params?.data ?? null;
-
-  const [initData, setInitData] = useState(
-    dataParam || {
-      Name: '',
-      Address: '',
-      Lat: 0,
-      Long: 0,
-    },
-  );
-
-  const {handleChange, handleSubmit, handleBlur, values, errors, touched, setFieldValue} = useFormik({
-    enableReinitialize: true,
-    initialValues: initData,
-    onSubmit: async e => {
-      try {
-        /* if (dataParam && dataParam.Id) {
-          await sqliteH.updateItem(dataParam?.tableName, {Name: e.Name}, [
-            {columnName: 'Id', value: dataParam.Id, operator: '='},
-          ]);
-        } else {
-          await sqliteH.insertItems(dataParam?.tableName, [{Name: e.Name}]);
-        }
-        showMessage({
-          message: 'Thành công',
-          description: 'Lưu dữ liệu thành công!',
-          type: 'success',
-        }); */
-        dispatch(actions.setRandom());
-
-        navigation.goBack();
-      } catch (error) {
-        console.log(error);
-        showMessage({
-          message: 'Thất bại',
-          description: 'Vui lòng kiểm tra lại!',
-          type: 'danger',
-        });
-      }
-    },
-  });
-
-  const Delete = async () => {
-    try {
-      await sqliteH.deleteItem(dataParam?.tableName, [{columnName: 'Id', value: dataParam.Id, operator: '='}]);
-      showMessage({
-        message: 'Thành công',
-        description: 'Xoá dữ liệu thành công!',
-        type: 'success',
-      });
-      dispatch(actions.setRandom());
-      navigation.goBack();
-    } catch (error) {
-      showMessage({
-        message: 'Thất bại',
-        description: 'Vui lòng kiểm tra lại!',
-        type: 'danger',
-      });
-    }
-  };
-
   return (
     <View style={{flex: 1, backgroundColor: Colors.white}}>
-      <Header title={dataParam?.tableTitle ?? ''} isStack={true} />
+      <Header title={'Chọn vị trí'} isStack={true} />
       <ScrollView style={{flex: 1, margin: 16}} showsVerticalScrollIndicator={false} showsHorizontalScrollIndicator={false}>
         <SafeAreaView>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome name={'stream'} style={{marginEnd: 16}} color={Colors.gray70} size={18} />
-            <TextInputNew
-              style={{backgroundColor: '#FFF', flex: 1}}
-              mode="flat"
-              label="Tên"
-              placeholder=""
-              value={values.Name}
-              onChangeText={handleChange('Name')}
-              underlineColor={Colors.gray60}
-              activeUnderlineColor={Colors.primary}
-              multiline={false}
-              numberOfLines={1}
-            />
-          </View>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
-            <FontAwesome name={'map-marker'} style={{marginEnd: 16}} color={Colors.gray70} size={18} solid />
-            <TextInputNew
-              style={{backgroundColor: '#FFF', flex: 1}}
-              mode="flat"
-              label={values.Address ? 'Địa chỉ' : 'Hãy chọn khu vực của bạn'}
-              placeholder=""
-              value={values.Address}
-              onChangeText={handleChange('Address')}
-              onPressIn={() => {
-                navigation.navigate('');
-              }}
-              underlineColor={Colors.gray60}
-              activeUnderlineColor={Colors.primary}
-              multiline={false}
-              numberOfLines={1}
-            />
-          </View>
           <TDButtonPrimary
             title={'CHỌN VỊ TRÍ'}
             contentStyle={{marginTop: 32, paddingVertical: 8}}
-            onPress={handleSubmit}
+            onPress={() => {}}
             titleStyle={{fontWeight: '300'}}
           />
         </SafeAreaView>
