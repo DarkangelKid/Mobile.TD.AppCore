@@ -23,6 +23,11 @@ const ListLoaiDichVuScreen = () => {
   const route = useRoute();
   const dataParam = route.params?.data ?? null;
 
+  const currentPosition = useSelector(state => state.global.currentPosition);
+  const loadPosition = useSelector(state => state.global.loadPosition);
+
+  console.log('currentPositioncurrentPosition', currentPosition);
+
   const [initData, setInitData] = useState(
     dataParam || {
       Name: '',
@@ -31,6 +36,14 @@ const ListLoaiDichVuScreen = () => {
       Long: 0,
     },
   );
+
+  useEffect(() => {
+    if (currentPosition) {
+      setInitData({...initData, Address: currentPosition.address});
+    }
+
+    return () => {};
+  }, [currentPosition]);
 
   const {handleChange, handleSubmit, handleBlur, values, errors, touched, setFieldValue} = useFormik({
     enableReinitialize: true,
@@ -109,13 +122,13 @@ const ListLoaiDichVuScreen = () => {
               label={values.Address ? 'Địa chỉ' : 'Hãy chọn khu vực của bạn'}
               placeholder=""
               value={values.Address}
-              onChangeText={handleChange('Address')}
+              //onChangeText={handleChange('Address')}
               onPressIn={() => {
+                dispatch(actions.saveCurrentPosition(null));
                 navigation.navigate('DiaDiem_SearchScreen');
               }}
               underlineColor={Colors.gray60}
               activeUnderlineColor={Colors.primary}
-              multiline={false}
               numberOfLines={1}
             />
           </View>

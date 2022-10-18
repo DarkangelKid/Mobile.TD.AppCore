@@ -8,6 +8,10 @@ export const setRandom = () => dispatch => {
   dispatch(actions.setRandom());
 };
 
-export const saveCurrentPosition = CurrentPosition => dispatch => {
-  return dispatch(actions.saveCurrentPosition(CurrentPosition));
+export const saveCurrentPosition = currentPosition => dispatch => {
+  return dispatch(actions.saveCurrentPosition(currentPosition));
+};
+
+export const setLoadPosition = data => dispatch => {
+  return dispatch(actions.setLoadPosition(data));
 };

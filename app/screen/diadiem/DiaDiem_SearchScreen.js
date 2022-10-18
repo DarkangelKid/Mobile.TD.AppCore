@@ -2,217 +2,230 @@
 import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 
-import {
-  StyleSheet,
-  PermissionsAndroid,
-  View,
-  TouchableOpacity,
-  ScrollView,
-  SafeAreaView,
-  Alert,
-  Dimensions,
-  Linking,
-  Platform,
-  ToastAndroid,
-} from 'react-native';
+import {StyleSheet, PermissionsAndroid, View, Linking, Platform, ActivityIndicator, Image} from 'react-native';
+
 import {useNavigation, useRoute, StackActions} from '@react-navigation/native';
-import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
-import {useFormik} from 'formik';
 import {showMessage} from 'react-native-flash-message';
 import {TextInput as TextInputNew} from 'react-native-paper';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
-import Geolocation, {GeoPosition} from 'react-native-geolocation-service';
+import Geolocation from 'react-native-geolocation-service';
 
 import RNPermissions, {request, check, PERMISSIONS, RESULTS, checkMultiple, openSettings} from 'react-native-permissions';
 
+import axios from 'axios';
+
 import {Colors, Fonts, Images} from '@app/themes';
-import SQLiteHelper from '@app/utils/SQLiteHelper';
 import * as actions from '@app/redux/global/Actions';
 
 import {Header, TDButtonPrimary, TDButtonSecondary} from '@app/components';
 
-const {width, height} = Dimensions.get('window');
-const ASPECT_RATIO = width / height;
-const LATITUDE = 21.0199694;
-const LONGITUDE = 105.84077;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-const SPACE = 0.01;
-
 const ListLoaiDichVuScreen = () => {
-  let CurrentPosition = useSelector(state => state.global.CurrentPosition);
+  const navigation = useNavigation();
 
-  const [region, setRegion] = useState({
-    latitude: CurrentPosition?.latitude ?? 0,
-    longitude: CurrentPosition?.longitude ?? 0,
-    latitudeDelta: 0.001,
-    longitudeDelta: 0.001,
-  });
-
-  const map = useRef(null);
+  const dispatch = useDispatch();
+  const [region, setRegion] = useState(null);
   const [location, setLocation] = useState(null);
   const [isMapReady, setIsMapReady] = useState(false);
 
-  const [a, setA] = useState({
-    latitude: LATITUDE + SPACE,
-    longitude: LONGITUDE + SPACE,
-  });
-
   useEffect(() => {
-    check(PERMISSIONS.IOS.LOCATION_ALWAYS)
-      .then(result => {
-        switch (result) {
-          case RESULTS.UNAVAILABLE:
-            console.log('This feature is not available (on this device / in this context)');
-            break;
-          case RESULTS.DENIED:
-            console.log('The permission has not been requested / is denied but requestable');
-            break;
-          case RESULTS.LIMITED:
-            console.log('The permission is limited: some actions are possible');
-            break;
-          case RESULTS.GRANTED:
-            console.log('The permission is granted');
-            break;
-          case RESULTS.BLOCKED:
-            console.log('The permission is denied and not requestable anymore');
-            break;
-        }
-      })
-      .catch(error => {
-        // …
-      });
-    //openSettings().catch(() => console.warn('cannot open settings'));
+    const hasPermissionIOS = async () => {
+      const openSetting = () => {
+        Linking.openSettings().catch(() => {});
+      };
+      const status = await Geolocation.requestAuthorization('whenInUse');
 
-    return () => {};
-  }, []);
+      if (status === 'granted') {
+        return true;
+      }
 
-  const hasPermissionIOS = async () => {
-    const openSetting = () => {
-      Linking.openSettings().catch(() => {
-        Alert.alert('Unable to open settings');
-      });
+      if (status === 'denied') {
+        //Alert.alert('Location permission denied');
+        showMessage({
+          message: 'Thất bại',
+          description: 'Vui lòng cấp quyền cho ứng dụng được phép phát hiện vị trí của bạn!',
+          type: 'danger',
+        });
+      }
+
+      if (status === 'disabled') {
+        /* Alert.alert(`Turn on Location Services to allow "123123" to determine your location.`, '', [
+          {text: 'Go to Settings', onPress: openSetting},
+          {text: "Don't Use Location", onPress: () => {}},
+        ]); */
+        showMessage({
+          message: 'Thất bại',
+          description: 'Vui lòng cấp quyền cho ứng dụng được phép phát hiện vị trí của bạn!',
+          type: 'danger',
+        });
+      }
+
+      return false;
     };
-    const status = await Geolocation.requestAuthorization('whenInUse');
 
-    if (status === 'granted') {
-      return true;
-    }
+    const hasLocationPermission = async () => {
+      if (Platform.OS === 'ios') {
+        const hasPermission = await hasPermissionIOS();
+        return hasPermission;
+      }
 
-    if (status === 'denied') {
-      Alert.alert('Location permission denied');
-    }
+      if (Platform.OS === 'android' && Platform.Version < 23) {
+        return true;
+      }
 
-    if (status === 'disabled') {
-      Alert.alert(`Turn on Location Services to allow "123123" to determine your location.`, '', [
-        {text: 'Go to Settings', onPress: openSetting},
-        {text: "Don't Use Location", onPress: () => {}},
-      ]);
-    }
+      const hasPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
-    return false;
-  };
+      if (hasPermission) {
+        return true;
+      }
 
-  const hasLocationPermission = async () => {
-    if (Platform.OS === 'ios') {
-      const hasPermission = await hasPermissionIOS();
-      return hasPermission;
-    }
+      const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
 
-    if (Platform.OS === 'android' && Platform.Version < 23) {
-      return true;
-    }
+      if (status === PermissionsAndroid.RESULTS.GRANTED) {
+        return true;
+      }
 
-    const hasPermission = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+      if (status === PermissionsAndroid.RESULTS.DENIED) {
+        //ToastAndroid.show('Location permission denied by user.', ToastAndroid.LONG);
+        showMessage({
+          message: 'Thất bại',
+          description: 'Vui lòng cấp quyền cho ứng dụng được phép phát hiện vị trí của bạn!',
+          type: 'danger',
+        });
+      } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
+        //ToastAndroid.show('Location permission revoked by user.', ToastAndroid.LONG);
+        showMessage({
+          message: 'Thất bại',
+          description: 'Vui lòng cấp quyền cho ứng dụng được phép phát hiện vị trí của bạn!',
+          type: 'danger',
+        });
+      }
 
-    if (hasPermission) {
-      return true;
-    }
+      return false;
+    };
 
-    const status = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+    const getLocation = async () => {
+      const hasPermission = await hasLocationPermission();
 
-    if (status === PermissionsAndroid.RESULTS.GRANTED) {
-      return true;
-    }
+      if (!hasPermission) {
+        return;
+      }
 
-    if (status === PermissionsAndroid.RESULTS.DENIED) {
-      ToastAndroid.show('Location permission denied by user.', ToastAndroid.LONG);
-    } else if (status === PermissionsAndroid.RESULTS.NEVER_ASK_AGAIN) {
-      ToastAndroid.show('Location permission revoked by user.', ToastAndroid.LONG);
-    }
-
-    return false;
-  };
-
-  const getLocation = async () => {
-    const hasPermission = await hasLocationPermission();
-
-    if (!hasPermission) {
-      return;
-    }
-
-    Geolocation.getCurrentPosition(
-      position => {
-        setLocation(position);
-        console.log(position);
-      },
-      error => {
-        Alert.alert(`Code ${error.code}`, error.message);
-        setLocation(null);
-        console.log(error);
-      },
-      {
-        accuracy: {
-          android: 'high',
-          ios: 'best',
+      Geolocation.getCurrentPosition(
+        position => {
+          setRegion({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            latitudeDelta: 0.01,
+            longitudeDelta: 0.01,
+          });
+          console.log('positionpositionposition');
+          console.log(position);
         },
-        enableHighAccuracy: true,
-        timeout: 15000,
-        maximumAge: 10000,
-        distanceFilter: 0,
-        forceRequestLocation: true,
-        forceLocationManager: true,
-        showLocationDialog: true,
-      },
-    );
-  };
-
-  useEffect(async () => {
-    await getLocation();
-
+        error => {
+          setRegion(null);
+          console.log(error);
+        },
+        {
+          accuracy: {
+            android: 'high',
+            ios: 'best',
+          },
+          enableHighAccuracy: true,
+          timeout: 15000,
+          maximumAge: 10000,
+          distanceFilter: 0,
+          forceRequestLocation: true,
+          forceLocationManager: true,
+          showLocationDialog: true,
+        },
+      );
+    };
+    getLocation();
     return () => {};
   }, []);
+
+  const LuaChonTriTri = async () => {
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${location.latitude},${location.longitude}&key=AIzaSyDlY4y5xHqMmmMfQiBszGlG9dxyVGKa8Ko`,
+      )
+      .then(response => {
+        try {
+          if (response.data.results[0].formatted_address) {
+            dispatch(
+              actions.saveCurrentPosition({
+                address: response.data.results[0].formatted_address,
+                latitude: location.latitude,
+                longitude: location.longitude,
+              }),
+            );
+            navigation.goBack();
+          }
+        } catch (errorr) {}
+      })
+      .catch(error => {});
+  };
 
   return (
     <View style={{flex: 1, backgroundColor: Colors.white}}>
       <Header title={'Chọn vị trí'} isStack={true} />
-      <View style={{flex: 1, backgroundColor: 'red'}}>
-        <MapView
-          showsUserLocation={true}
-          style={{flex: 1}}
-          provider={PROVIDER_GOOGLE}
-          showsMyLocationButton={true}
-          onMapReady={() => {
-            setIsMapReady(true);
-          }}
-          region={region}>
-          <Marker
+      {!region ? (
+        <ActivityIndicator size="large" color="#fb8c00" style={{flex: 1, justifyContent: 'center'}} />
+      ) : (
+        <View style={{flex: 1, backgroundColor: 'red'}}>
+          <MapView
+            showsUserLocation={true}
+            style={{flex: 1}}
+            provider={PROVIDER_GOOGLE}
+            showsMyLocationButton={true}
+            onMapReady={() => {
+              setIsMapReady(true);
+            }}
+            onRegionChangeComplete={e => {
+              setLocation(e);
+            }}
+            region={region}>
+            {/*  <Marker
             coordinate={a}
-            /* onSelect={e => console.log('onSelect', e)}
+            onSelect={e => console.log('onSelect', e)}
             onDrag={e => console.log('onDrag', e)}
-            onDragStart={e => console.log('onDragStart', e)} */
+            onDragStart={e => console.log('onDragStart', e)}
             onDragEnd={e => console.log('onDragEnd', e.nativeEvent.coordinate)}
             //onPress={e => console.log('onPress', e)}
             title={'Vị trí của bạn'}
             draggable>
             <View style={{width: 10, height: 10, backgroundColor: 'black'}}></View>
-          </Marker>
-        </MapView>
-      </View>
+          </Marker> */}
+          </MapView>
+          <View style={styles.markerFixed}>
+            <Image source={Images.icons.pin} style={styles.marker} />
+          </View>
+          <TDButtonPrimary
+            title={'CHỌN VỊ TRÍ NÀY'}
+            contentStyle={{position: 'absolute', bottom: 0, marginBottom: 20, alignSelf: 'center'}}
+            onPress={() => {
+              LuaChonTriTri();
+            }}
+            titleStyle={{fontWeight: '300'}}
+          />
+        </View>
+      )}
     </View>
   );
 };
 
 export default ListLoaiDichVuScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  markerFixed: {
+    left: '50%',
+    marginLeft: -24,
+    marginTop: -48 - 12,
+    position: 'absolute',
+    top: '50%',
+  },
+  marker: {
+    height: 48,
+    width: 48,
+  },
+});
